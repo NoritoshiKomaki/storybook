@@ -1,0 +1,35 @@
+name: Update Google Sheet
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  update-sheet:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v2
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: 14
+
+      - name: Install Dependencies
+        run: npm install
+
+      - name: Update Google Sheet
+        run: |
+          # ReactとTypeScriptのバージョンを取得
+          REACT_VERSION=$(npm show react version)
+          TYPESCRIPT_VERSION=$(npm show typescript version)
+
+
+          # GitHubリポジトリ名を取得
+          REPOSITORY_NAME=$(basename $(pwd))
+
+          # Google SheetsにReactとTypeScriptのバージョンを記入するスクリプトを呼び出す
+          node update-sheet.js $REACT_VERSION $TYPESCRIPT_VERSION $REPOSITORY_NAME
