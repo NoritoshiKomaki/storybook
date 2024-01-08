@@ -61,5 +61,8 @@
     "prop-types": "^15.8.1",
     "storybook": "^7.3.2",
     "webpack": "^5.88.2"
+  },
+  "volta": {
+    "node": "20.10.0"
   }
 }
